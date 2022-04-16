@@ -57,6 +57,12 @@ public class Test {
         Assert.assertArrayEquals(a, resultArray);
     }
 
+    @org.junit.Test
+    public void testQS(){
+        QS.quickSort(testArray, 0, testArray.length-1);
+        Assert.assertArrayEquals(a, testArray);
+    }
+
     @After//在每个方法之后运行
     public void end(){
         l=System.currentTimeMillis()-l;
