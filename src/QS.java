@@ -1,6 +1,7 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -37,13 +38,19 @@ public class QS {
         return smallPointer+1;
     }
 
-    public static void quickSort(int[] inputArray, int start, int end){
+    public static void qs(int[] inputArray, int start, int end){
         if(end <= start || inputArray == null) return;
         else {
 //            System.out.println(start+" "+end);
             int pivot = partition(inputArray, start, end);
-            quickSort(inputArray, start, pivot-1);
-            quickSort(inputArray, pivot + 1, end);
+            qs(inputArray, start, pivot-1);
+            qs(inputArray, pivot + 1, end);
         }
+    }
+
+    public static int[] quickSort(int[] inputArray) {
+        int[] workingArray = Arrays.copyOf(inputArray, inputArray.length);
+        qs(workingArray, 0, workingArray.length - 1);
+        return workingArray;
     }
 }

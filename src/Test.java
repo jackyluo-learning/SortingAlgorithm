@@ -22,13 +22,13 @@ public class Test {
 
     static {
         Random random = new Random();
-        for (int t = 0; t < a.length; t++) a[t] = (random.nextInt(100));
+        for (int t = 0; t < a.length; t++) a[t] = (random.nextInt(10000));
         testArray = Arrays.copyOf(a, a.length);
         Arrays.sort(a);
     }
 
     @Before//在每个测试方法之前运行
-    public void Testbegin(){
+    public void testBegin(){
         l = System.currentTimeMillis();
     }
 
@@ -59,16 +59,16 @@ public class Test {
 
     @org.junit.Test
     public void testQS(){
-        QS.quickSort(testArray, 0, testArray.length-1);
-        Assert.assertArrayEquals(a, testArray);
+        resultArray = QS.quickSort(testArray);
+        Assert.assertArrayEquals(a, resultArray);
     }
 
     @After//在每个方法之后运行
-    public void end(){
+    public void testEnd(){
         l=System.currentTimeMillis()-l;
-        System.out.println("\nInput: "+Arrays.toString(testArray));
+//        System.out.println("\nInput: "+Arrays.toString(testArray));
         System.out.println(name.getMethodName()+" run for "+l+"ms");
-        System.out.println(String.format("%s result: %s", name.getMethodName(), Arrays.toString(resultArray)));
+//        System.out.println(String.format("%s result: %s", name.getMethodName(), Arrays.toString(resultArray)));
     }
 
 }
