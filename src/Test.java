@@ -62,17 +62,10 @@ public class Test {
     }
 
     @org.junit.Test
-    public void test () {
-        int[] test = {6,5,4,1,3,2,8};
-        HS hs1 = new HS(test.length);
-        for (int i = 0; i < test.length; i++) {
-            hs1.insert(test[i]);
-        }
-        hs1.printArray();
-
-        HS hs2 = new HS(test);
-        hs2.buildHeap();
-        hs2.printArray();
+    public void testHS () {
+        HS hs2 = new HS(testArray);
+        resultArray = hs2.sort();
+        Assert.assertArrayEquals(a, resultArray);
     }
 
     @After//在每个方法之后运行

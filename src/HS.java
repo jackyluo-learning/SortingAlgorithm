@@ -1,5 +1,8 @@
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 public class HS {
     /**
      * 建堆：
@@ -17,7 +20,7 @@ public class HS {
     }
 
     public HS (int[] num) {
-        this.item = num;
+        this.item = Arrays.copyOf(num, num.length);
         this.size = num.length;
     }
 
@@ -32,23 +35,33 @@ public class HS {
     }
 
     public void heapify (int size, int i) {
-        while (true) {
             int maxIndex = i;
             int leftChild = i * 2 + 1;
             int rightChild = i * 2 + 2;
-            if (leftChild < size && this.item[i] < this.item[leftChild]) {
+            if (leftChild < size && this.item[maxIndex] < this.item[leftChild]) {
                 maxIndex = leftChild;
             }
-            if (rightChild < size && this.item[i] < this.item[rightChild]) {
+            if (rightChild < size && this.item[maxIndex] < this.item[rightChild]) {
                 maxIndex = rightChild;
             }
-            if (maxIndex == i) break;
-            swap(i, maxIndex);
-            i = maxIndex;
-        }
+            if (maxIndex != i) {
+                swap(i, maxIndex);
+                heapify(size, maxIndex);
+            }
     }
 
-    public void buildHeap () {
+    public int[] sort() {
+        int len = this.item.length;
+        buildHeap();
+        for (int i = len - 1; i >= 0; i--) {
+            swap(0, i);
+            len--;
+            heapify(len, 0);
+        }
+        return Arrays.copyOf(this.item, this.size);
+    }
+
+    public void buildHeap (){
         int size = this.item.length;
         for (int i = size/2; i >= 0; i--) {
             heapify(size, i);
@@ -62,9 +75,7 @@ public class HS {
     }
 
     public void printArray () {
-        for (int i = 0; i < this.size; i++) {
-            System.out.println(this.item[i]);
-        }
+        System.out.println(Arrays.toString(this.item));
     }
 }
 
