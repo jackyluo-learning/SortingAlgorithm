@@ -4,10 +4,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
 
-import java.sql.Time;
 import java.util.Arrays;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 
 public class Test {
@@ -61,6 +59,20 @@ public class Test {
     public void testQS(){
         resultArray = QS.quickSort(testArray);
         Assert.assertArrayEquals(a, resultArray);
+    }
+
+    @org.junit.Test
+    public void test () {
+        int[] test = {6,5,4,1,3,2,8};
+        HS hs1 = new HS(test.length);
+        for (int i = 0; i < test.length; i++) {
+            hs1.insert(test[i]);
+        }
+        hs1.printArray();
+
+        HS hs2 = new HS(test);
+        hs2.buildHeap();
+        hs2.printArray();
     }
 
     @After//在每个方法之后运行
